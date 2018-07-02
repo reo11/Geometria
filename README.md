@@ -52,7 +52,7 @@ git push origin issue/1
 ```
 
 ### コンフリクトが発生した場合
-masterにマージしたい場合
+- masterにマージしたい場合
 masterを最新のものにする
 ```
 git checkout master
