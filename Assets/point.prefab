@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 33567841805083228}
   - component: {fileID: 65622719817558176}
   - component: {fileID: 23962138487460154}
-  - component: {fileID: 114908879695367064}
+  - component: {fileID: 114413882910623220}
+  - component: {fileID: 114140571548400850}
   m_Layer: 0
   m_Name: point
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1165515353791846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.97, y: 2.93, z: 0.022747464}
+  m_LocalPosition: {x: -4.97, y: 3.15, z: 0.022747464}
   m_LocalScale: {x: 0.7926438, y: 0.8272029, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,7 +97,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114908879695367064
+--- !u!114 &114140571548400850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165515353791846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ed1d6faad58534c9ee302f47b6bcb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114413882910623220
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -112,12 +124,12 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1165515353791846}
-          m_MethodName: 
+        - m_Target: {fileID: 114140571548400850}
+          m_MethodName: OnUserAction
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
