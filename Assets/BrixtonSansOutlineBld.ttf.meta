@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 4b3dd3221be14496c8c2f4512d5add6e
+timeCreated: 1531296148
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Brixton Sans TC Outline
+  fontNames:
+  - Brixton Sans TC Outline
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
