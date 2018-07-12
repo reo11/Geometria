@@ -83,7 +83,3 @@ git commit -m "commit message"
 git push origin issue/number -f
 ```
 `-f`オプションは強制上書きなので出来るだけ使わないようにしましょう
-
-rebse test reo
-
-reoreoreo
