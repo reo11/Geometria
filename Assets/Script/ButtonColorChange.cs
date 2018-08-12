@@ -23,14 +23,6 @@ public class ButtonColorChange : MonoBehaviour {
         var button = this.GetComponent<Button>();
         var colors = button.colors;
 
-        /*
-        colors.normalColor = btnColor;
-        colors.highlightedColor = btnColor;
-        colors.pressedColor = btnColor;
-        colors.disabledColor = btnColor;
-
-        button.colors = colors;
-        */
         button.image.color = btnColor;
     }
 }
