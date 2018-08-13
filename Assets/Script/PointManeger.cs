@@ -5,7 +5,6 @@ using UnityEngine;
 public class PointManeger : MonoBehaviour {
 
     public GameObject pointPrefab;
-    public int pointNum;
     public Canvas canvas;
 
     // 一時的に位置を用意
@@ -19,6 +18,8 @@ public class PointManeger : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        int pointNum = PosList.Count;
+
         for (int i = 0; i < pointNum; i++)
         {
             PointGen(PosList[i]);
