@@ -6,9 +6,10 @@ public class PointManeger : MonoBehaviour {
 
     public GameObject pointPrefab;
     public Canvas canvas;
+    const int pointNum = 5;
 
     // 一時的に位置を用意
-    List<Vector3> PosList = new List<Vector3>(){
+     Vector3[] PosList = new Vector3[pointNum]{
         new Vector3(0f, 0f, 0f),
         new Vector3(0f, -500f, 0f),
         new Vector3(-300f, 0f, 0f),
@@ -16,18 +17,17 @@ public class PointManeger : MonoBehaviour {
         new Vector3(0f, 500f, 0f),
         };
 
-    // Use this for initialization
-    void Start () {
-        int pointNum = PosList.Count;
 
+    // Use this for initialization
+    void Start() {
         for (int i = 0; i < pointNum; i++)
         {
             PointGen(PosList[i]);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
