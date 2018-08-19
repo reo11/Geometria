@@ -239,7 +239,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointPrefab: {fileID: 1423020702606272, guid: c5bdd5d6bb3883c45b226f11caecccd0,
     type: 2}
-  pointNum: 5
   canvas: {fileID: 1860363254}
 --- !u!4 &953306140
 Transform:

@@ -8,13 +8,13 @@ public class ButtonColorChange : MonoBehaviour {
     [SerializeField]
     Color btnColor = Color.red;
     // id
-    private static int countID = 0; 
-    public int Id{ get; private set; }
+    private static int countID = 0;
+    public int Id { get; private set; }
 
     // Use this for initialization
     void Start () {
         Id = countID++;
-        Debug.Log(Id);
+        //Debug.Log(Id);
 	}
 	
 	// Update is called once per frame
@@ -28,6 +28,6 @@ public class ButtonColorChange : MonoBehaviour {
         var colors = button.colors;
 
         button.image.color = btnColor;
-        Debug.Log(this.Id);
+        //Debug.Log(Id);
     }
 }
