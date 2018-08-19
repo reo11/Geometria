@@ -62,9 +62,12 @@ public class PointManeger : MonoBehaviour {
         // 点のつながりを更新
         if(aheadPoint != -1)
         {
-            connectionMap[Id, aheadPoint] = true;
-            connectionMap[aheadPoint, Id] = true;
-            DrawLine(WorldPosList[aheadPoint], WorldPosList[Id]);
+            if (connectionMap[Id, aheadPoint] == false)
+            {
+                connectionMap[Id, aheadPoint] = true;
+                connectionMap[aheadPoint, Id] = true;
+                DrawLine(WorldPosList[aheadPoint], WorldPosList[Id]);
+            }
         }
         aheadPoint = Id;
         /*
