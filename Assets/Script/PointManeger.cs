@@ -106,7 +106,6 @@ public class PointManeger : MonoBehaviour {
 
         //スクリーン座標→ワールド座標に変換
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, screenPos, canvas.worldCamera, out result);
-        Debug.Log(screenPos);
         return result;
     }
 }

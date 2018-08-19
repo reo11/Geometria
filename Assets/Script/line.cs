@@ -10,10 +10,7 @@ public class line : MonoBehaviour {
 
     void Start()
     {
-        /*
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = 2;
-        */
+
     }
 
     void Update()
