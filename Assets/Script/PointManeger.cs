@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PointManeger : MonoBehaviour {
 
@@ -26,7 +27,12 @@ public class PointManeger : MonoBehaviour {
     bool[,] connectionMap = new bool[pointNum, pointNum];
 
     // 1つ前の押された点を保持
-    int aheadPoint = -1;
+    int firstPoint = -1;
+    // 2つ前の押された点を保持(三角形検出用)
+    int secondPoint = -1;
+
+    // 検出した三角形リスト
+    List<int[]> detectedTriangles = new List<int[]>();
 
 
     // Use this for initialization
@@ -60,16 +66,24 @@ public class PointManeger : MonoBehaviour {
     void OnClickPoint(int Id)
     {
         // 点のつながりを更新
-        if(aheadPoint != -1)
+        if(firstPoint != -1)
         {
-            if (connectionMap[Id, aheadPoint] == false)
+            if (connectionMap[Id, firstPoint] == false)
             {
-                connectionMap[Id, aheadPoint] = true;
-                connectionMap[aheadPoint, Id] = true;
-                DrawLine(WorldPosList[aheadPoint], WorldPosList[Id]);
+                connectionMap[Id, firstPoint] = true;
+                connectionMap[firstPoint, Id] = true;
+                DrawLine(WorldPosList[firstPoint], WorldPosList[Id]);
             }
+
+            secondPoint = firstPoint;
+            firstPoint = Id;
+            // 三角形のチェック処理を入れる
+            CheckTriangle();
         }
-        aheadPoint = Id;
+        else
+        {
+            firstPoint = Id;
+        }
         /*
         //Debug.Log(connectionMap); // 型しか表示されねぇ！
         for(int i =0; i < pointNum; i++)
@@ -92,7 +106,7 @@ public class PointManeger : MonoBehaviour {
     }
 
     // uiの座標をworld座標に変換する関数
-    private Vector3 GetWorldPositionFromRectPosition(RectTransform rect)
+    Vector3 GetWorldPositionFromRectPosition(RectTransform rect)
     {
         /*
         http://alien-program.hatenablog.com/entry/2017/08/06/164258
@@ -107,5 +121,29 @@ public class PointManeger : MonoBehaviour {
         //スクリーン座標→ワールド座標に変換
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, screenPos, canvas.worldCamera, out result);
         return result;
+    }
+
+    void CheckTriangle()
+    {
+        for(int i = 0; i < pointNum; i++)
+        {
+            if(connectionMap[firstPoint, i] == true && connectionMap[secondPoint, i] == true)
+            {
+                int[] triangle = new int[3] { firstPoint, secondPoint, i };
+                // sortして重複して入らないように
+                Array.Sort(triangle);
+                // TODO:何故かcontainsが重複していてもfalseになってしまっているので要修正
+                if (detectedTriangles.Contains(triangle) == false)
+                {
+                    detectedTriangles.Add(triangle);
+                    
+                    Debug.Log("Triangle!");
+                    Debug.Log(triangle[0]);
+                    Debug.Log(triangle[1]);
+                    Debug.Log(triangle[2]);
+                    Debug.Log(detectedTriangles.Count);
+                }
+            }
+        }
     }
 }
