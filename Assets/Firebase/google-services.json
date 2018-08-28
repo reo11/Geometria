@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "481381191329",
+    "firebase_url": "https://geometria-161bd.firebaseio.com",
+    "project_id": "geometria-161bd",
+    "storage_bucket": "geometria-161bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481381191329:android:2b90d5f8548f7969",
+        "android_client_info": {
+          "package_name": "com.Company.Geometria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481381191329-p0j971n9sb5oqekq7mtq4ma73qc78t9k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnGCey_gwSZA1ZJ8GNQmcVwMmp_BZp3xI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
