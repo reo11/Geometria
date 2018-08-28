@@ -9,7 +9,8 @@ public class ScoreRanking : MonoBehaviour {
 	public DatabaseReference ScoreRankDB;
     private int mapNum = 0;
    	private GameObject rankList;
-   	private Score[] scoreList = new Score[Constants.RankingCounts];
+    public const int RankingCounts = 5;
+   	private Score[] scoreList = new Score[RankingCounts];
     public Text firstPrize, secondPrize, thirdPrize, forthPrize, fifthPrize;
 
 
@@ -33,10 +34,10 @@ public class ScoreRanking : MonoBehaviour {
 
     // 特定のマップのみ取得/更新
     private void initialSet(DatabaseReference DB, int mapNum){
-        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(Constants.RankingCounts).ChildAdded += HandleChildAdded;
-        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(Constants.RankingCounts).ChildChanged += HandleChildChanged;
-        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(Constants.RankingCounts).ChildRemoved += HandleChildRemoved;
-        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(Constants.RankingCounts).ChildMoved += HandleChildMoved;
+        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(RankingCounts).ChildAdded += HandleChildAdded;
+        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(RankingCounts).ChildChanged += HandleChildChanged;
+        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(RankingCounts).ChildRemoved += HandleChildRemoved;
+        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(RankingCounts).ChildMoved += HandleChildMoved;
     }
 
     void HandleChildAdded(object sender, ChildChangedEventArgs args) {
@@ -79,7 +80,7 @@ public class ScoreRanking : MonoBehaviour {
         // Do something with the data in args.Snapshot
     }
     public void getScoreRanking(DatabaseReference DB){
-        DB.OrderByChild("point").LimitToLast(Constants.RankingCounts).GetValueAsync().ContinueWith(task => {
+        DB.OrderByChild("point").LimitToLast(RankingCounts).GetValueAsync().ContinueWith(task => {
             if (task.IsFaulted) {
             // Handle the error...
             }
@@ -93,7 +94,7 @@ public class ScoreRanking : MonoBehaviour {
                     string userName = (string)data.Child("userName").GetValue(true);
                     string point = data.Child("point").GetValue(true).ToString();
                     Score score = new Score(userName, point);
-                    scoreList[Constants.RankingCounts-count] = score;
+                    scoreList[RankingCounts-count] = score;
                     count++;
                 }
                 this.firstPrize.text = "1st " + scoreList[0].userName + " : " + scoreList[0].point;
