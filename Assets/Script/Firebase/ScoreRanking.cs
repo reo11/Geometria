@@ -7,9 +7,9 @@ using Firebase.Unity.Editor;
 using UnityEngine.UI;
 public class ScoreRanking : MonoBehaviour {
 	public DatabaseReference ScoreRankDB;
-    private int mapNum = 0;
-    private GameObject rankList;
-    private Score[] scoreList = new Score[Constants.RankingCounts];
+    	private int mapNum = 0;
+   	private GameObject rankList;
+   	private Score[] scoreList = new Score[Constants.RankingCounts];
 
   // Use this for initialization
     void Start () {
@@ -21,9 +21,9 @@ public class ScoreRanking : MonoBehaviour {
         // DB参照をprivateフィールドにとっておく
         ScoreRankDB = FirebaseDatabase.DefaultInstance.GetReference("ScoreRanking");
         // for test
-            // addNewUser("aaa","aaa","aaa");
-            // insertScore(0, "aaa", "aaa", 5000);
-            // initialSet(ScoreRankDB, mapNum);
+        // addNewUser("aaa","aaa","aaa");
+        // insertScore(0, "aaa", "aaa", 5000);
+        // initialSet(ScoreRankDB, mapNum);
     }
 
     // 特定のマップのみ取得/更新
@@ -50,6 +50,7 @@ public class ScoreRanking : MonoBehaviour {
         return;
       }
       Debug.Log("HandleChildChanged");
+	getScoreRanking(args.Snapshot.Reference.Parent);
       // Do something with the data in args.Snapshot
     }
 
@@ -59,6 +60,7 @@ public class ScoreRanking : MonoBehaviour {
         return;
       }
       Debug.Log("HandleChildRemoved");
+	getScoreRanking(args.Snapshot.Reference.Parent);
       // Do something with the data in args.Snapshot
     }
 
@@ -68,6 +70,7 @@ public class ScoreRanking : MonoBehaviour {
         return;
       }
       Debug.Log("HandleChildMoved");
+	getScoreRanking(args.Snapshot.Reference.Parent);
       // Do something with the data in args.Snapshot
     }
     public void getScoreRanking(DatabaseReference DB){
