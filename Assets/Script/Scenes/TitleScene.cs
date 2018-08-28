@@ -10,4 +10,11 @@ public class TitleScene : MonoBehaviour {
 		// buildに各シーンを追加しないといけない
 		SceneManager.LoadScene ("Ranking");
     }
+
+	public void OnClickSetting()
+    {
+        Debug.Log("setting");
+		// buildに各シーンを追加しないといけない
+		SceneManager.LoadScene ("Setting");
+    }
 }
