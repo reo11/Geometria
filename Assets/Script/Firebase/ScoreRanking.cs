@@ -23,15 +23,15 @@ public class ScoreRanking : MonoBehaviour {
         // for test
             // addNewUser("aaa","aaa","aaa");
             // insertScore(0, "aaa", "aaa", 5000);
-            initialSet(ScoreRankDB, mapNum);
+            // initialSet(ScoreRankDB, mapNum);
     }
 
     // 特定のマップのみ取得/更新
     private void initialSet(DatabaseReference DB, int mapNum){
-        DB.Child(mapNum.ToString()).ChildAdded += HandleChildAdded;
-        DB.Child(mapNum.ToString()).ChildChanged += HandleChildChanged;
-        DB.Child(mapNum.ToString()).ChildRemoved += HandleChildRemoved;
-        DB.Child(mapNum.ToString()).ChildMoved += HandleChildMoved;
+        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(Constants.RankingCounts).ChildAdded += HandleChildAdded;
+        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(Constants.RankingCounts).ChildChanged += HandleChildChanged;
+        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(Constants.RankingCounts).ChildRemoved += HandleChildRemoved;
+        DB.Child(mapNum.ToString()).OrderByChild("point").LimitToLast(Constants.RankingCounts).ChildMoved += HandleChildMoved;
     }
 
     void HandleChildAdded(object sender, ChildChangedEventArgs args) {
@@ -40,7 +40,7 @@ public class ScoreRanking : MonoBehaviour {
             return;
         }
         Debug.Log("HandleChildAdded");
-        getScoreRanking(args.Snapshot.Reference);
+        getScoreRanking(args.Snapshot.Reference.Parent);
         // Do something with the data in args.Snapshot
     }
 
@@ -80,7 +80,6 @@ public class ScoreRanking : MonoBehaviour {
                 // Do something with snapshot...
                 IEnumerator<DataSnapshot> en = snapshot.Children.GetEnumerator();
                 int count=1;
-                Debug.Log("here");
                 Debug.Log(snapshot.ChildrenCount);
                 while(en.MoveNext()){
                     DataSnapshot data = en.Current;
@@ -90,7 +89,6 @@ public class ScoreRanking : MonoBehaviour {
                     scoreList[Constants.RankingCounts-count] = score;
                     count++;
                 }
-                Debug.Log(scoreList[0].userName);
             }
         });
     }
