@@ -66,10 +66,9 @@ git status
 ```
 コンフリクト解消＆保存した後
 ```
-git add .
 git rebase --continue
 ```
-コンフリクトがなくなるまでaddとrebaseを繰り返す
+コンフリクトがなくなるまでrebaseを繰り返す
 
 - それでも直らなかったら
 ```
