@@ -132,11 +132,32 @@ public class PointManeger : MonoBehaviour {
                 int[] triangle = new int[3] { firstPoint, secondPoint, i };
                 // sortして重複して入らないように
                 Array.Sort(triangle);
+                /*
                 // TODO:何故かcontainsが重複していてもfalseになってしまっているので要修正
-                if (detectedTriangles.Contains(triangle) == false)
+                // 配列の比較が == で出来ないクソ仕様っぽい
+                if (detectedTriangles.Contains(triangle) == true)
                 {
                     detectedTriangles.Add(triangle);
                     
+                    Debug.Log("Triangle!");
+                    Debug.Log(triangle[0]);
+                    Debug.Log(triangle[1]);
+                    Debug.Log(triangle[2]);
+                    Debug.Log(detectedTriangles.Count);
+                }
+                */
+                bool duplication = false;
+                for (int j = 0; j < detectedTriangles.Count; j++)
+                {
+                    if(triangle[0] == detectedTriangles[j][0] && triangle[1] == detectedTriangles[j][1] && triangle[2] == detectedTriangles[j][2])
+                    {
+                        duplication = true;
+                    }
+                }
+                if(duplication == false)
+                {
+                    detectedTriangles.Add(triangle);
+
                     Debug.Log("Triangle!");
                     Debug.Log(triangle[0]);
                     Debug.Log(triangle[1]);
