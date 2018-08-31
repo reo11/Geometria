@@ -159,6 +159,7 @@ public class PointManeger : MonoBehaviour {
                     detectedTriangles.Add(triangle);
 
                     Debug.Log(CalcArea(triangle));
+                    Debug.Log(detectedTriangles.Count);
                 }
             }
         }
