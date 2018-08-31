@@ -12,12 +12,12 @@ public class PointManeger : MonoBehaviour {
     const int pointNum = 5;
 
     // 一時的に位置を用意
-     Vector3[] PosList = new Vector3[pointNum]{
-        new Vector3(0f, 0f, 0f),
-        new Vector3(0f, -500f, 0f),
-        new Vector3(-300f, 0f, 0f),
-        new Vector3(300f, 0f, 0f),
-        new Vector3(0f, 500f, 0f),
+    Vector2[] PosList = new Vector2[pointNum]{
+        new Vector2(0f, 0f),
+        new Vector2(0f, -500f),
+        new Vector2(-300f, 0f),
+        new Vector2(300f, 0f),
+        new Vector2(0f, 500f),
         };
 
     // poslistのworld座標版(poslistはui座標)
