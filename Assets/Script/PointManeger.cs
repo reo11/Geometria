@@ -12,16 +12,16 @@ public class PointManeger : MonoBehaviour {
     const int pointNum = 5;
 
     // 一時的に位置を用意
-     Vector3[] PosList = new Vector3[pointNum]{
-        new Vector3(0f, 0f, 0f),
-        new Vector3(0f, -500f, 0f),
-        new Vector3(-300f, 0f, 0f),
-        new Vector3(300f, 0f, 0f),
-        new Vector3(0f, 500f, 0f),
+    Vector2[] PosList = new Vector2[pointNum]{
+        new Vector2(0f, 0f),
+        new Vector2(0f, -500f),
+        new Vector2(-300f, 0f),
+        new Vector2(300f, 0f),
+        new Vector2(0f, 500f),
         };
 
     // poslistのworld座標版(poslistはui座標)
-    Vector3[] WorldPosList = new Vector3[pointNum];
+    Vector2[] WorldPosList = new Vector2[pointNum];
 
     // 点のつながりを保存(Falseで初期化される)
     bool[,] connectionMap = new bool[pointNum, pointNum];
@@ -158,13 +158,21 @@ public class PointManeger : MonoBehaviour {
                 {
                     detectedTriangles.Add(triangle);
 
-                    Debug.Log("Triangle!");
-                    Debug.Log(triangle[0]);
-                    Debug.Log(triangle[1]);
-                    Debug.Log(triangle[2]);
+                    Debug.Log(CalcArea(triangle));
                     Debug.Log(detectedTriangles.Count);
                 }
             }
         }
+    }
+
+    float CalcArea(int[] triangle)
+    {
+        float x1 = PosList[triangle[1]][0] - PosList[triangle[0]][0];
+        float y1 = PosList[triangle[1]][1] - PosList[triangle[0]][1];
+        float x2 = PosList[triangle[2]][0] - PosList[triangle[0]][0];
+        float y2 = PosList[triangle[2]][1] - PosList[triangle[0]][1];
+
+        float area = 0.5f * Mathf.Abs(x2 * y1 - y2 * x1);
+        return (area);
     }
 }
