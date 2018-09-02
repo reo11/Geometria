@@ -18,7 +18,7 @@ public class PointManeger : MonoBehaviour {
         new Vector2(-300f, 0f),
         new Vector2(300f, 0f),
         new Vector2(0f, 500f),
-        };
+    };
 
     // poslistのworld座標版(poslistはui座標)
     Vector2[] WorldPosList = new Vector2[pointNum];
@@ -78,7 +78,12 @@ public class PointManeger : MonoBehaviour {
             secondPoint = firstPoint;
             firstPoint = Id;
             // 三角形のチェック処理を入れる
-            CheckTriangle();
+            var triangles = CheckTriangle();
+            foreach (var i in triangles)
+            {
+                Debug.Log(CalcArea(i));
+                Debug.Log(detectedTriangles.Count);
+            }
         }
         else
         {
@@ -123,8 +128,10 @@ public class PointManeger : MonoBehaviour {
         return result;
     }
 
-    void CheckTriangle()
+    List<int[]> CheckTriangle()
     {
+        List<int[]> diffTriangles = new List<int[]>();
+
         for(int i = 0; i < pointNum; i++)
         {
             if(connectionMap[firstPoint, i] == true && connectionMap[secondPoint, i] == true)
@@ -157,12 +164,12 @@ public class PointManeger : MonoBehaviour {
                 if(duplication == false)
                 {
                     detectedTriangles.Add(triangle);
-
-                    Debug.Log(CalcArea(triangle));
-                    Debug.Log(detectedTriangles.Count);
+                    diffTriangles.Add(triangle);
                 }
             }
         }
+
+        return (diffTriangles);
     }
 
     float CalcArea(int[] triangle)
