@@ -11,6 +11,15 @@ public class Triangle : MonoBehaviour {
     [SerializeField]
     private Material _mat;
 
+    static int circulation = 0;
+
+    Color[] colors = new Color[]
+    {
+        new Color(248/255f, 243/255f, 214/255f, 1.0f),
+        new Color(227/255f, 63/255f, 35/255f, 1.0f),
+        new Color(3/255f, 179/255f, 202/255f, 1.0f),
+    };
+
     // Use this for initialization
     void Start () {
 
@@ -44,6 +53,11 @@ public class Triangle : MonoBehaviour {
 
         var renderer = GetComponent<MeshRenderer>();
         renderer.material = _mat;
+
+        // いったん三角形の色は、3色を循環させとく
+        renderer.material.color = colors[circulation++];
+        circulation = circulation % colors.Length;
+        Debug.Log(circulation);
     }
 
     bool CheckClockwise(Vector3[] pos)
