@@ -199,6 +199,10 @@ public class PointManeger : MonoBehaviour
     }
 
     // 三角形を描画する
+    /*
+     * こっからパクった
+     * http://www.shibuya24.info/entry/2015/11/29/180748
+    */
     void DrawTriangle(int[] triangle)
     {
         Vector3[] position = new Vector3[]
