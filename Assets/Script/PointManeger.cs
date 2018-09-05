@@ -12,6 +12,8 @@ public class PointManeger : MonoBehaviour
     public GameObject linePrefab;
     const int pointNum = 11;
     public GameObject trianglePrefab;
+    public GameObject ScoreText;
+
     // 一時的に位置を用意
     Vector2[] PosList = new Vector2[pointNum]{
         new Vector2(-400f, 108f),
@@ -37,6 +39,9 @@ public class PointManeger : MonoBehaviour
     int firstPoint = -1;
     // 2つ前の押された点を保持(三角形検出用)
     int secondPoint = -1;
+
+    // スコア
+    int score = 0;
 
     // 検出した三角形リスト
     List<int[]> detectedTriangles = new List<int[]>();
@@ -92,7 +97,7 @@ public class PointManeger : MonoBehaviour
             {
                 Debug.Log(CalcArea(triangle));
                 Debug.Log(detectedTriangles.Count);
-
+                Scoring(triangle);
                 DrawTriangle(triangle);
             }
         }
@@ -210,5 +215,13 @@ public class PointManeger : MonoBehaviour
 
         var prefab = Instantiate(trianglePrefab, transform.position, transform.rotation) as GameObject;
         prefab.GetComponent<Triangle>().SetTriangle(position);
+    }
+
+    void Scoring(int[] triangle)
+    {
+        float area = CalcArea(triangle);
+        // 今はintに変換して1/10にしとく(スコアリング)
+        score += (int)area / 10;
+        ScoreText.GetComponent<InGameScore>().PrintScore(score.ToString());
     }
 }

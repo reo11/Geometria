@@ -243,6 +243,7 @@ MonoBehaviour:
   linePrefab: {fileID: 1797009297677784, guid: 166a519b04a6c7c4288442bb03bea1e4, type: 2}
   trianglePrefab: {fileID: 1497529941864264, guid: de3d0e5c54e8dc145a41a797015d767c,
     type: 2}
+  ScoreText: {fileID: 1533710971}
 --- !u!4 &953306140
 Transform:
   m_ObjectHideFlags: 0
@@ -393,8 +394,9 @@ GameObject:
   - component: {fileID: 1533710972}
   - component: {fileID: 1533710974}
   - component: {fileID: 1533710973}
+  - component: {fileID: 1533710975}
   m_Layer: 5
-  m_Name: Score
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,13 +452,24 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Score
+  m_Text: Score:0
 --- !u!222 &1533710974
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1533710971}
+--- !u!114 &1533710975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1533710971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0795e8909f75b83458bd6899951a290b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1860363251
 GameObject:
   m_ObjectHideFlags: 0
