@@ -10,25 +10,23 @@ public class PointManeger : MonoBehaviour
     public GameObject pointPrefab;
     public Canvas canvas;
     public GameObject linePrefab;
-    const int pointNum = 5;
+    const int pointNum = 11;
     public GameObject trianglePrefab;
-    /*
+    public GameObject ScoreText;
+
     // 一時的に位置を用意
     Vector2[] PosList = new Vector2[pointNum]{
-        new Vector2(0f, 0f),
-        new Vector2(0f, -500f),
-        new Vector2(-300f, 0f),
-        new Vector2(300f, 0f),
-        new Vector2(0f, 500f),
-    };
-    */
-    // 一時的に位置を用意
-    Vector2[] PosList = new Vector2[pointNum]{
-        new Vector2(0f, 500f),
-        new Vector2(300f, 0f),
-        new Vector2(0f, -500f),
-        new Vector2(-300f, 0f),
-        new Vector2(0f, 0f),
+        new Vector2(-400f, 108f),
+        new Vector2(-362f, -187f),
+        new Vector2(-255f, 56f),
+        new Vector2(-52f, 123f),
+        new Vector2(-127f, -147f),
+        new Vector2(47f, -32f),
+        new Vector2(59f, -187f),
+        new Vector2(386f, 84f),
+        new Vector2(191f, 146f),
+        new Vector2(258f, -60f),
+        new Vector2(362f, -191f),
     };
 
     // poslistのworld座標版(poslistはui座標)
@@ -41,6 +39,9 @@ public class PointManeger : MonoBehaviour
     int firstPoint = -1;
     // 2つ前の押された点を保持(三角形検出用)
     int secondPoint = -1;
+
+    // スコア
+    int score = 0;
 
     // 検出した三角形リスト
     List<int[]> detectedTriangles = new List<int[]>();
@@ -99,7 +100,7 @@ public class PointManeger : MonoBehaviour
                 {
                     Debug.Log(CalcArea(triangle));
                     Debug.Log(detectedTriangles.Count);
-
+                    Scoring(triangle);
                     DrawTriangle(triangle);
                 }
             }
@@ -218,5 +219,13 @@ public class PointManeger : MonoBehaviour
 
         var prefab = Instantiate(trianglePrefab, transform.position, transform.rotation) as GameObject;
         prefab.GetComponent<Triangle>().SetTriangle(position);
+    }
+
+    void Scoring(int[] triangle)
+    {
+        float area = CalcArea(triangle);
+        // 今はintに変換して1/10にしとく(スコアリング)
+        score += (int)area / 10;
+        ScoreText.GetComponent<InGameScore>().PrintScore(score.ToString());
     }
 }
