@@ -252,7 +252,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 56738897}
-        m_MethodName: OnClickStart
+        m_MethodName: OnClickModeSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 56738892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07852e079b45a6246ba540e0fbf0440b, type: 3}
+  m_Script: {fileID: 11500000, guid: aeca9aaeed3a84f4eaeecea6e66155ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1549941067
@@ -552,7 +552,7 @@ Transform:
   m_GameObject: {fileID: 1733344001}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.01, y: -0.01, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.59, y: 0.59, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -602,7 +602,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2092907543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07852e079b45a6246ba540e0fbf0440b, type: 3}
+  m_Script: {fileID: 11500000, guid: aeca9aaeed3a84f4eaeecea6e66155ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2092907546
