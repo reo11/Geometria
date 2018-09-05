@@ -10,25 +10,21 @@ public class PointManeger : MonoBehaviour
     public GameObject pointPrefab;
     public Canvas canvas;
     public GameObject linePrefab;
-    const int pointNum = 5;
+    const int pointNum = 11;
     public GameObject trianglePrefab;
-    /*
     // 一時的に位置を用意
     Vector2[] PosList = new Vector2[pointNum]{
-        new Vector2(0f, 0f),
-        new Vector2(0f, -500f),
-        new Vector2(-300f, 0f),
-        new Vector2(300f, 0f),
-        new Vector2(0f, 500f),
-    };
-    */
-    // 一時的に位置を用意
-    Vector2[] PosList = new Vector2[pointNum]{
-        new Vector2(0f, 500f),
-        new Vector2(300f, 0f),
-        new Vector2(0f, -500f),
-        new Vector2(-300f, 0f),
-        new Vector2(0f, 0f),
+        new Vector2(-400f, 108f),
+        new Vector2(-362f, -187f),
+        new Vector2(-255f, 56f),
+        new Vector2(-52f, 123f),
+        new Vector2(-127f, -147f),
+        new Vector2(47f, -32f),
+        new Vector2(59f, -187f),
+        new Vector2(386f, 84f),
+        new Vector2(191f, 146f),
+        new Vector2(258f, -60f),
+        new Vector2(362f, -191f),
     };
 
     // poslistのworld座標版(poslistはui座標)
