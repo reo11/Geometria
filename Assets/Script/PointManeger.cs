@@ -79,31 +79,35 @@ public class PointManeger : MonoBehaviour
 
     void OnClickPoint(int Id)
     {
-        // 点のつながりを更新
-        if (firstPoint != -1)
+        // 連続して点を押された場合は無視
+        if (Id != firstPoint)
         {
-            if (connectionMap[Id, firstPoint] == false)
+            // 点のつながりを更新
+            if (firstPoint != -1)
             {
-                connectionMap[Id, firstPoint] = true;
-                connectionMap[firstPoint, Id] = true;
-                DrawLine(WorldPosList[firstPoint], WorldPosList[Id]);
-            }
+                if (connectionMap[Id, firstPoint] == false)
+                {
+                    connectionMap[Id, firstPoint] = true;
+                    connectionMap[firstPoint, Id] = true;
+                    DrawLine(WorldPosList[firstPoint], WorldPosList[Id]);
+                }
 
-            secondPoint = firstPoint;
-            firstPoint = Id;
-            // 三角形のチェック処理を入れる
-            var triangles = CheckTriangle();
-            foreach (var triangle in triangles)
-            {
-                Debug.Log(CalcArea(triangle));
-                Debug.Log(detectedTriangles.Count);
-                Scoring(triangle);
-                DrawTriangle(triangle);
+                secondPoint = firstPoint;
+                firstPoint = Id;
+                // 三角形のチェック処理を入れる
+                var triangles = CheckTriangle();
+                foreach (var triangle in triangles)
+                {
+                    Debug.Log(CalcArea(triangle));
+                    Debug.Log(detectedTriangles.Count);
+                    Scoring(triangle);
+                    DrawTriangle(triangle);
+                }
             }
-        }
-        else
-        {
-            firstPoint = Id;
+            else
+            {
+                firstPoint = Id;
+            }
         }
         /*
         //Debug.Log(connectionMap); // 型しか表示されねぇ！
