@@ -11,7 +11,8 @@ public class ScoreRanking : MonoBehaviour {
    	private GameObject rankList;
     public const int RankingCounts = 5;
    	private Score[] scoreList = new Score[RankingCounts];
-    public Text firstPrize, secondPrize, thirdPrize, forthPrize, fifthPrize;
+    public Text firstPrizeUser, secondPrizeUser, thirdPrizeUser, forthPrizeUser, fifthPrizeUser;
+    public Text firstPrizeScore, secondPrizeScore, thirdPrizeScore, forthPrizeScore, fifthPrizeScore;
 
 
   // Use this for initialization
@@ -97,11 +98,17 @@ public class ScoreRanking : MonoBehaviour {
                     scoreList[RankingCounts-count] = score;
                     count++;
                 }
-                this.firstPrize.text = "1st " + scoreList[0].userName + " : " + scoreList[0].point;
-                this.secondPrize.text = "2nd " + scoreList[1].userName + " : " + scoreList[1].point;
-                this.thirdPrize.text = "3rd " + scoreList[2].userName + " : " + scoreList[2].point;
-                this.forthPrize.text = "4th " + scoreList[3].userName + " : " + scoreList[3].point;
-                this.fifthPrize.text = "5th " + scoreList[4].userName + " : " + scoreList[4].point;
+                this.firstPrizeUser.text = scoreList[0].userName;
+                this.secondPrizeUser.text = scoreList[1].userName;
+                this.thirdPrizeUser.text = scoreList[2].userName;
+                this.forthPrizeUser.text = scoreList[3].userName;
+                this.fifthPrizeUser.text = scoreList[4].userName;
+                this.firstPrizeScore.text = scoreList[0].point;
+                this.secondPrizeScore.text = scoreList[1].point;
+                this.thirdPrizeScore.text = scoreList[2].point;
+                this.forthPrizeScore.text = scoreList[3].point;
+                this.fifthPrizeScore.text = scoreList[4].point;
+
             }
         });
     }
