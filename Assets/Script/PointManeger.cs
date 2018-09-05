@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class PointManeger : MonoBehaviour {
+public class PointManeger : MonoBehaviour
+{
 
     public GameObject pointPrefab;
     public Canvas canvas;
     public GameObject linePrefab;
     const int pointNum = 5;
-
+    public GameObject trianglePrefab;
+    /*
     // 一時的に位置を用意
     Vector2[] PosList = new Vector2[pointNum]{
         new Vector2(0f, 0f),
@@ -18,7 +20,16 @@ public class PointManeger : MonoBehaviour {
         new Vector2(-300f, 0f),
         new Vector2(300f, 0f),
         new Vector2(0f, 500f),
-        };
+    };
+    */
+    // 一時的に位置を用意
+    Vector2[] PosList = new Vector2[pointNum]{
+        new Vector2(0f, 500f),
+        new Vector2(300f, 0f),
+        new Vector2(0f, -500f),
+        new Vector2(-300f, 0f),
+        new Vector2(0f, 0f),
+    };
 
     // poslistのworld座標版(poslistはui座標)
     Vector2[] WorldPosList = new Vector2[pointNum];
@@ -36,7 +47,8 @@ public class PointManeger : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         for (int i = 0; i < pointNum; i++)
         {
             PointGen(PosList[i], i);
@@ -44,9 +56,10 @@ public class PointManeger : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-		
-	}
+    void Update()
+    {
+
+    }
 
     void PointGen(Vector3 position, int id)
     {
@@ -66,7 +79,7 @@ public class PointManeger : MonoBehaviour {
     void OnClickPoint(int Id)
     {
         // 点のつながりを更新
-        if(firstPoint != -1)
+        if (firstPoint != -1)
         {
             if (connectionMap[Id, firstPoint] == false)
             {
@@ -78,7 +91,14 @@ public class PointManeger : MonoBehaviour {
             secondPoint = firstPoint;
             firstPoint = Id;
             // 三角形のチェック処理を入れる
-            CheckTriangle();
+            var triangles = CheckTriangle();
+            foreach (var triangle in triangles)
+            {
+                Debug.Log(CalcArea(triangle));
+                Debug.Log(detectedTriangles.Count);
+
+                DrawTriangle(triangle);
+            }
         }
         else
         {
@@ -123,11 +143,13 @@ public class PointManeger : MonoBehaviour {
         return result;
     }
 
-    void CheckTriangle()
+    List<int[]> CheckTriangle()
     {
-        for(int i = 0; i < pointNum; i++)
+        List<int[]> diffTriangles = new List<int[]>();
+
+        for (int i = 0; i < pointNum; i++)
         {
-            if(connectionMap[firstPoint, i] == true && connectionMap[secondPoint, i] == true)
+            if (connectionMap[firstPoint, i] == true && connectionMap[secondPoint, i] == true)
             {
                 int[] triangle = new int[3] { firstPoint, secondPoint, i };
                 // sortして重複して入らないように
@@ -149,20 +171,20 @@ public class PointManeger : MonoBehaviour {
                 bool duplication = false;
                 for (int j = 0; j < detectedTriangles.Count; j++)
                 {
-                    if(triangle[0] == detectedTriangles[j][0] && triangle[1] == detectedTriangles[j][1] && triangle[2] == detectedTriangles[j][2])
+                    if (triangle[0] == detectedTriangles[j][0] && triangle[1] == detectedTriangles[j][1] && triangle[2] == detectedTriangles[j][2])
                     {
                         duplication = true;
                     }
                 }
-                if(duplication == false)
+                if (duplication == false)
                 {
                     detectedTriangles.Add(triangle);
-
-                    Debug.Log(CalcArea(triangle));
-                    Debug.Log(detectedTriangles.Count);
+                    diffTriangles.Add(triangle);
                 }
             }
         }
+
+        return (diffTriangles);
     }
 
     float CalcArea(int[] triangle)
@@ -174,5 +196,23 @@ public class PointManeger : MonoBehaviour {
 
         float area = 0.5f * Mathf.Abs(x2 * y1 - y2 * x1);
         return (area);
+    }
+
+    // 三角形を描画する
+    /*
+     * こっからパクった
+     * http://www.shibuya24.info/entry/2015/11/29/180748
+    */
+    void DrawTriangle(int[] triangle)
+    {
+        Vector3[] position = new Vector3[]
+        {
+                WorldPosList[ triangle[0] ],
+                WorldPosList[ triangle[1] ],
+                WorldPosList[ triangle[2] ],
+        };
+
+        var prefab = Instantiate(trianglePrefab, transform.position, transform.rotation) as GameObject;
+        prefab.GetComponent<Triangle>().SetTriangle(position);
     }
 }
