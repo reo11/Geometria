@@ -181,7 +181,8 @@ public class PointManeger : MonoBehaviour
                         duplication = true;
                     }
                 }
-                if (duplication == false)
+                var inside = CheckInside(triangle);
+                if (duplication == false && inside == true)
                 {
                     detectedTriangles.Add(triangle);
                     diffTriangles.Add(triangle);
@@ -227,5 +228,59 @@ public class PointManeger : MonoBehaviour
         // 今はintに変換して1/10にしとく(スコアリング)
         score += (int)area / 10;
         ScoreText.GetComponent<InGameScore>().PrintScore(score.ToString());
+    }
+
+    // ここで内外判定をする
+    bool CheckInside(int[] triangle)
+    {
+        foreach (var detectedTriangle in detectedTriangles)
+        {
+            Vector3[] pos = new Vector3[3]
+            {
+                WorldPosList[detectedTriangle[0]],
+                WorldPosList[detectedTriangle[1]],
+                WorldPosList[detectedTriangle[2]],
+            };
+            var x = CheckClockwise(pos, WorldPosList[triangle[0]]);
+            var y = CheckClockwise(pos, WorldPosList[triangle[1]]);
+            var z = CheckClockwise(pos, WorldPosList[triangle[2]]);
+            //Debug.Log(x);
+            //Debug.Log(y);
+            //Debug.Log(z);
+            if (x + y + z < 2)
+            {
+                return (false);
+            }
+        }
+        return (true);
+    }
+
+    // 内外判定用の外積(Triangleスクリプトにもある)
+    int CheckClockwise(Vector3[] triangle, Vector3 point)
+    {
+        Vector3 AB = triangle[1] - triangle[0];
+        Vector3 BC = triangle[2] - triangle[1];
+        Vector3 CA = triangle[0] - triangle[2];
+        Vector3 AP = point - triangle[0];
+        Vector3 BP = point - triangle[1];
+        Vector3 CP = point - triangle[2];
+
+        Vector3 crossA = Vector3.Cross(AB, BP).normalized;
+        Vector3 crossB = Vector3.Cross(BC, CP).normalized;
+        Vector3 crossC = Vector3.Cross(CA, AP).normalized;
+
+        Debug.Log(crossA);
+        Debug.Log(crossB);
+        Debug.Log(crossC);
+
+        if ((crossA[2] > 0 && crossB[2] > 0 && crossC[2] > 0) || (crossA[2] < 0 && crossB[2] < 0 && crossC[2] < 0) || (Math.Abs(crossA[2] + crossB[2]+crossC[2]) > 1))
+        {
+            //三角形の内側に点がある
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 }
