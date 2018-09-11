@@ -14,6 +14,7 @@ public class PointManeger : MonoBehaviour
     public GameObject trianglePrefab;
     public GameObject ScoreText;
     public GameObject HPText;
+    public GameObject SceneController;
 
     // 一時的に位置を用意
     Vector2[] PosList = new Vector2[pointNum]{
@@ -110,6 +111,20 @@ public class PointManeger : MonoBehaviour
                         Scoring(triangle);
                         DrawTriangle(triangle);
                     }
+                }
+                // 終了判定を入れたい
+                bool finish = false;
+                for (int i = 0; i < pointNum; i++)
+                {
+                    if (i != firstPoint && i != secondPoint) {
+                         finish = finish || HPText.GetComponent<HP>().CheckHP(CalcHP(firstPoint, i));
+                    }
+                }
+                if(finish == false)
+                {
+                    // シーン遷移画面へ
+                    Debug.Log("finish");
+                    SceneController.GetComponent<SceneController>().OnClickTitle();
                 }
             }
             else
