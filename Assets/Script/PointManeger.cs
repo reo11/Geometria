@@ -273,7 +273,7 @@ public class PointManeger : MonoBehaviour
         Debug.Log(crossB);
         Debug.Log(crossC);
 
-        if ((crossA[2] >= 0 && crossB[2] >= 0 && crossC[2] >= 0) || (crossA[2] <= 0 && crossB[2] <= 0 && crossC[2] <= 0) || (Math.Abs(crossA[2] + crossB[2]+crossC[2]) > 1))
+        if ((crossA[2] > 0 && crossB[2] > 0 && crossC[2] > 0) || (crossA[2] < 0 && crossB[2] < 0 && crossC[2] < 0) || (Math.Abs(crossA[2] + crossB[2]+crossC[2]) > 1))
         {
             //三角形の内側に点がある
             return 0;
