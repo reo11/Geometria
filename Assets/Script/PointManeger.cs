@@ -241,7 +241,7 @@ public class PointManeger : MonoBehaviour
     int CalcHP(int first, int second)
     {
         Vector3 line = WorldPosList[second] - WorldPosList[first];
-        return ((int)line.sqrMagnitude / 5);
+        return ((int)line.sqrMagnitude / 20);
         
     }
 
