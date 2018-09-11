@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HP : MonoBehaviour {
 
-    int hitPoint = 10000;
+    private int hitPoint = 10000;
 
 	// Use this for initialization
 	void Start () {
@@ -27,5 +27,10 @@ public class HP : MonoBehaviour {
     {
         hitPoint += score;
         this.GetComponent<Text>().text = "HP:" + hitPoint.ToString();
+    }
+
+    public bool CheckHP(int score)
+    {
+        return (score <= hitPoint);
     }
 }

@@ -86,25 +86,30 @@ public class PointManeger : MonoBehaviour
             // 点のつながりを更新
             if (firstPoint != -1)
             {
-                if (connectionMap[Id, firstPoint] == false)
+                // HPが十分にあるか検証
+                bool enough = HPText.GetComponent<HP>().CheckHP(CalcHP(Id, firstPoint));
+                if (enough == true)
                 {
-                    connectionMap[Id, firstPoint] = true;
-                    connectionMap[firstPoint, Id] = true;
-                    DrawLine(WorldPosList[firstPoint], WorldPosList[Id]);
-                }
+                    if (connectionMap[Id, firstPoint] == false)
+                    {
+                        connectionMap[Id, firstPoint] = true;
+                        connectionMap[firstPoint, Id] = true;
+                        DrawLine(WorldPosList[firstPoint], WorldPosList[Id]);
+                    }
 
-                secondPoint = firstPoint;
-                firstPoint = Id;
-                // コスト消費の処理を追加
-                CostHP(WorldPosList[ secondPoint] - WorldPosList[ firstPoint]);
-                // 三角形のチェック処理を入れる
-                var triangles = CheckTriangle();
-                foreach (var triangle in triangles)
-                {
-                    Debug.Log(CalcArea(triangle));
-                    Debug.Log(detectedTriangles.Count);
-                    Scoring(triangle);
-                    DrawTriangle(triangle);
+                    secondPoint = firstPoint;
+                    firstPoint = Id;
+                    // コスト消費の処理を追加
+                    HPText.GetComponent<HP>().SubHP(CalcHP(secondPoint, firstPoint));
+                    // 三角形のチェック処理を入れる
+                    var triangles = CheckTriangle();
+                    foreach (var triangle in triangles)
+                    {
+                        Debug.Log(CalcArea(triangle));
+                        Debug.Log(detectedTriangles.Count);
+                        Scoring(triangle);
+                        DrawTriangle(triangle);
+                    }
                 }
             }
             else
@@ -233,10 +238,11 @@ public class PointManeger : MonoBehaviour
         ScoreText.GetComponent<InGameScore>().PrintScore(score.ToString());
     }
 
-    void CostHP(Vector3 line)
+    int CalcHP(int first, int second)
     {
-        float dist = line.sqrMagnitude;
-        HPText.GetComponent<HP>().SubHP((int)dist / 10);
+        Vector3 line = WorldPosList[second] - WorldPosList[first];
+        return ((int)line.sqrMagnitude / 5);
+        
     }
 
     // ここで内外判定をする
