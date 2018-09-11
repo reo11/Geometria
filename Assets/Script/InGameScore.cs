@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class InGameScore : MonoBehaviour {
 
+    public static string offlineScore;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -17,6 +19,12 @@ public class InGameScore : MonoBehaviour {
 
     public void PrintScore(string score)
     {
+        offlineScore = score;
         this.GetComponent<Text>().text = "Score:" + score;
+    }
+
+    public static string getScore()
+    {
+        return (offlineScore);
     }
 }
