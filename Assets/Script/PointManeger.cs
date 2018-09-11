@@ -13,6 +13,7 @@ public class PointManeger : MonoBehaviour
     const int pointNum = 11;
     public GameObject trianglePrefab;
     public GameObject ScoreText;
+    public GameObject HPText;
 
     // 一時的に位置を用意
     Vector2[] PosList = new Vector2[pointNum]{
@@ -94,6 +95,8 @@ public class PointManeger : MonoBehaviour
 
                 secondPoint = firstPoint;
                 firstPoint = Id;
+                // コスト消費の処理を追加
+                CostHP(WorldPosList[ secondPoint] - WorldPosList[ firstPoint]);
                 // 三角形のチェック処理を入れる
                 var triangles = CheckTriangle();
                 foreach (var triangle in triangles)
@@ -228,6 +231,12 @@ public class PointManeger : MonoBehaviour
         // 今はintに変換して1/10にしとく(スコアリング)
         score += (int)area / 10;
         ScoreText.GetComponent<InGameScore>().PrintScore(score.ToString());
+    }
+
+    void CostHP(Vector3 line)
+    {
+        float dist = line.sqrMagnitude;
+        HPText.GetComponent<HP>().SubHP((int)dist / 10);
     }
 
     // ここで内外判定をする

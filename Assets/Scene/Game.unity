@@ -312,6 +312,7 @@ MonoBehaviour:
   trianglePrefab: {fileID: 1497529941864264, guid: de3d0e5c54e8dc145a41a797015d767c,
     type: 2}
   ScoreText: {fileID: 1533710971}
+  HPText: {fileID: 1464267325}
 --- !u!4 &953306140
 Transform:
   m_ObjectHideFlags: 0
@@ -335,6 +336,7 @@ GameObject:
   - component: {fileID: 1464267326}
   - component: {fileID: 1464267328}
   - component: {fileID: 1464267327}
+  - component: {fileID: 1464267329}
   m_Layer: 5
   m_Name: HP
   m_TagString: Untagged
@@ -399,6 +401,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1464267325}
+--- !u!114 &1464267329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1464267325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b294f836aba3f545af4cac0ec487159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1493923303
 GameObject:
   m_ObjectHideFlags: 0
