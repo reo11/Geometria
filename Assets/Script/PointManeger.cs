@@ -13,6 +13,8 @@ public class PointManeger : MonoBehaviour
     const int pointNum = 11;
     public GameObject trianglePrefab;
     public GameObject ScoreText;
+    public GameObject HPText;
+    public GameObject SceneController;
 
     // 一時的に位置を用意
     Vector2[] PosList = new Vector2[pointNum]{
@@ -85,23 +87,44 @@ public class PointManeger : MonoBehaviour
             // 点のつながりを更新
             if (firstPoint != -1)
             {
-                if (connectionMap[Id, firstPoint] == false)
+                // HPが十分にあるか検証
+                bool enough = HPText.GetComponent<HP>().CheckHP(CalcHP(Id, firstPoint));
+                if (enough == true)
                 {
-                    connectionMap[Id, firstPoint] = true;
-                    connectionMap[firstPoint, Id] = true;
-                    DrawLine(WorldPosList[firstPoint], WorldPosList[Id]);
-                }
+                    if (connectionMap[Id, firstPoint] == false)
+                    {
+                        connectionMap[Id, firstPoint] = true;
+                        connectionMap[firstPoint, Id] = true;
+                        DrawLine(WorldPosList[firstPoint], WorldPosList[Id]);
+                    }
 
-                secondPoint = firstPoint;
-                firstPoint = Id;
-                // 三角形のチェック処理を入れる
-                var triangles = CheckTriangle();
-                foreach (var triangle in triangles)
+                    secondPoint = firstPoint;
+                    firstPoint = Id;
+                    // コスト消費の処理を追加
+                    HPText.GetComponent<HP>().SubHP(CalcHP(secondPoint, firstPoint));
+                    // 三角形のチェック処理を入れる
+                    var triangles = CheckTriangle();
+                    foreach (var triangle in triangles)
+                    {
+                        Debug.Log(CalcArea(triangle));
+                        Debug.Log(detectedTriangles.Count);
+                        Scoring(triangle);
+                        DrawTriangle(triangle);
+                    }
+                }
+                // 終了判定を入れたい
+                bool finish = false;
+                for (int i = 0; i < pointNum; i++)
                 {
-                    Debug.Log(CalcArea(triangle));
-                    Debug.Log(detectedTriangles.Count);
-                    Scoring(triangle);
-                    DrawTriangle(triangle);
+                    if (i != firstPoint && i != secondPoint) {
+                         finish = finish || HPText.GetComponent<HP>().CheckHP(CalcHP(firstPoint, i));
+                    }
+                }
+                if(finish == false)
+                {
+                    // シーン遷移画面へ
+                    Debug.Log("finish");
+                    SceneController.GetComponent<SceneController>().OnClickOfflineScore();
                 }
             }
             else
@@ -228,6 +251,13 @@ public class PointManeger : MonoBehaviour
         // 今はintに変換して1/10にしとく(スコアリング)
         score += (int)area / 10;
         ScoreText.GetComponent<InGameScore>().PrintScore(score.ToString());
+    }
+
+    int CalcHP(int first, int second)
+    {
+        Vector3 line = WorldPosList[second] - WorldPosList[first];
+        return ((int)line.sqrMagnitude / 20);
+        
     }
 
     // ここで内外判定をする

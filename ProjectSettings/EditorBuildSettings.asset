@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scene/Ranking.unity
+    path: 
     guid: c36d4f429e163ba4b8affe3255f582b3
   - enabled: 1
     path: Assets/Scene/Title.unity
@@ -24,8 +24,11 @@ EditorBuildSettings:
     path: Assets/Scene/ModeSelect.unity
     guid: 1a24706716fbeef4aa9cad9e8d82ffdc
   - enabled: 1
-    path: Assets/Scene/test.unity
+    path: Assets/Scene/Game.unity
     guid: 83effcbe37b2acc418978664d2abc35e
   - enabled: 1
     path: Assets/Scene/StageSelect.unity
     guid: 35419319f1a393b40a3ae13c70a3cddc
+  - enabled: 1
+    path: Assets/Scene/OfflineScore.unity
+    guid: fec5daa90eee3e444b756212e755a004
