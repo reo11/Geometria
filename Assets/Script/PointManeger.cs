@@ -124,7 +124,7 @@ public class PointManeger : MonoBehaviour
                 {
                     // シーン遷移画面へ
                     Debug.Log("finish");
-                    SceneController.GetComponent<SceneController>().OnClickTitle();
+                    SceneController.GetComponent<SceneController>().OnClickOfflineScore();
                 }
             }
             else

@@ -52,4 +52,11 @@ public class SceneController : MonoBehaviour {
 		// buildに各シーンを追加しないといけない
 		SceneManager.LoadScene ("SingleMode");
     }
+
+    public void OnClickOfflineScore()
+    {
+        Debug.Log("offlineScore");
+        // buildに各シーンを追加しないといけない
+        SceneManager.LoadScene("OfflineScore");
+    }
 }
