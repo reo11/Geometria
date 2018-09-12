@@ -38,5 +38,8 @@ public class line : MonoBehaviour {
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, start);
         lineRenderer.SetPosition(1, end);
+        // 色付けてみる
+        lineRenderer.startColor = Color.gray;
+        lineRenderer.endColor = Color.gray;
     }
 }
