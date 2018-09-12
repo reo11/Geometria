@@ -48,6 +48,9 @@ public class PointManeger : MonoBehaviour
     // 検出した三角形リスト
     List<int[]> detectedTriangles = new List<int[]>();
 
+    // 生成したgameobjectのリスト
+    GameObject[] PointObjects = new GameObject[pointNum];
+
 
     // Use this for initialization
     void Start()
@@ -77,6 +80,9 @@ public class PointManeger : MonoBehaviour
         // ↑このタイミングではまだbuttoncolorchangeのstart関数が走ってないのでidに適切な数が代入されてない(すべて0)
         // onClickに追加する
         prefab.GetComponent<Button>().onClick.AddListener(() => { OnClickPoint(id); });
+
+        // 後でdestroyしやすいようにここで取っておいてみる
+        PointObjects[id] = prefab;
     }
 
     void OnClickPoint(int Id)
@@ -116,11 +122,12 @@ public class PointManeger : MonoBehaviour
                 bool finish = false;
                 for (int i = 0; i < pointNum; i++)
                 {
-                    if (i != firstPoint && i != secondPoint) {
-                         finish = finish || HPText.GetComponent<HP>().CheckHP(CalcHP(firstPoint, i));
+                    if (i != firstPoint && i != secondPoint)
+                    {
+                        finish = finish || HPText.GetComponent<HP>().CheckHP(CalcHP(firstPoint, i));
                     }
                 }
-                if(finish == false)
+                if (finish == false)
                 {
                     // シーン遷移画面へ
                     Debug.Log("finish");
@@ -196,6 +203,8 @@ public class PointManeger : MonoBehaviour
                     Debug.Log(detectedTriangles.Count);
                 }
                 */
+
+                // 三角形がすでに作られているかの判定
                 bool duplication = false;
                 for (int j = 0; j < detectedTriangles.Count; j++)
                 {
@@ -204,11 +213,31 @@ public class PointManeger : MonoBehaviour
                         duplication = true;
                     }
                 }
+                // 三角形の内部の点を使って(あとなんかあった気がする)三角形を作っていないかの判定
                 var inside = CheckInside(triangle);
                 if (duplication == false && inside == true)
                 {
                     detectedTriangles.Add(triangle);
                     diffTriangles.Add(triangle);
+                }
+                // 三角形の内部の点を消す判定
+                // コードが汚すぎるので要修正
+                for (int num = 0; num < pointNum; num++)
+                {
+                    if (num != triangle[0] && num != triangle[1] && num != triangle[2])
+                    {
+                        Vector3[] pos = new Vector3[3]
+                        {
+                        WorldPosList[triangle[0]],
+                        WorldPosList[triangle[1]],
+                        WorldPosList[triangle[2]],
+                        };
+                        var insidepoint = CheckClockwise(pos, WorldPosList[num]);
+                        if (insidepoint == 0)
+                        {
+                            Destroy(PointObjects[num]);
+                        }
+                    }
                 }
             }
         }
@@ -257,7 +286,7 @@ public class PointManeger : MonoBehaviour
     {
         Vector3 line = WorldPosList[second] - WorldPosList[first];
         return ((int)line.sqrMagnitude / 20);
-        
+
     }
 
     // ここで内外判定をする
@@ -303,7 +332,7 @@ public class PointManeger : MonoBehaviour
         Debug.Log(crossB);
         Debug.Log(crossC);
 
-        if ((crossA[2] > 0 && crossB[2] > 0 && crossC[2] > 0) || (crossA[2] < 0 && crossB[2] < 0 && crossC[2] < 0) || (Math.Abs(crossA[2] + crossB[2]+crossC[2]) > 1))
+        if ((crossA[2] > 0 && crossB[2] > 0 && crossC[2] > 0) || (crossA[2] < 0 && crossB[2] < 0 && crossC[2] < 0) || (Math.Abs(crossA[2] + crossB[2] + crossC[2]) > 1))
         {
             //三角形の内側に点がある
             return 0;
