@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114823544273137350}
   - component: {fileID: 33282272304454036}
   - component: {fileID: 23854476463392702}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1497529941864264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 142.22145, y: 215.41129, z: -1.5625}
+  m_LocalPosition: {x: 142.22145, y: 215.41129, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
 --- !u!33 &33282272304454036
 MeshFilter:
   m_ObjectHideFlags: 1
