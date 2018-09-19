@@ -8,7 +8,6 @@ public class PointManeger : MonoBehaviour
 {
 
     public GameObject pointPrefab;
-    public Canvas buttonCanvas;
     public Canvas canvas;
     public GameObject linePrefab;
     const int pointNum = 11;
@@ -67,9 +66,9 @@ public class PointManeger : MonoBehaviour
 
     void PointGen(Vector3 position, int id)
     {
-        var prefab = Instantiate(pointPrefab, buttonCanvas.transform, false) as GameObject;
+        var prefab = Instantiate(pointPrefab, canvas.transform, false) as GameObject;
         // 親を設定する
-        prefab.transform.SetParent(buttonCanvas.transform, false);
+        prefab.transform.SetParent(canvas.transform, false);
         RectTransform rectTransform = prefab.GetComponent<RectTransform>();
         //prefab.GetComponent<RectTransform>().localPosition = position;
         rectTransform.localPosition = position;
