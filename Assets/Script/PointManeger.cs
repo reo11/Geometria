@@ -44,7 +44,7 @@ public class PointManeger : MonoBehaviour
     int secondPoint = -1;
 
     // スコア
-    int score = 0;
+    int score;
 
     // 検出した三角形リスト
     List<int[]> detectedTriangles = new List<int[]>();
@@ -53,6 +53,7 @@ public class PointManeger : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        score = 0;
         for (int i = 0; i < pointNum; i++)
         {
             PointGen(PosList[i], i);
@@ -257,7 +258,7 @@ public class PointManeger : MonoBehaviour
         float area = CalcArea(triangle);
         // 今はintに変換して1/10にしとく(スコアリング)
         score += (int)area / 10;
-        ScoreText.GetComponent<InGameScore>().PrintScore(score.ToString());
+        ScoreText.GetComponent<InGameScore>().PrintScore(score);
     }
 
     int CalcHP(int first, int second)
