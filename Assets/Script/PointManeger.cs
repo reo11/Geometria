@@ -9,6 +9,7 @@ public class PointManeger : MonoBehaviour
 
     public GameObject pointPrefab;
     public Canvas canvas;
+    public Canvas buttonCanvas;
     public GameObject linePrefab;
     const int pointNum = 11;
     public GameObject trianglePrefab;
@@ -67,6 +68,8 @@ public class PointManeger : MonoBehaviour
     void PointGen(Vector3 position, int id)
     {
         var prefab = Instantiate(pointPrefab, canvas.transform, false) as GameObject;
+        // 親を設定する
+        prefab.transform.SetParent(buttonCanvas.transform, false);
         RectTransform rectTransform = prefab.GetComponent<RectTransform>();
         //prefab.GetComponent<RectTransform>().localPosition = position;
         rectTransform.localPosition = position;
@@ -150,6 +153,8 @@ public class PointManeger : MonoBehaviour
     void DrawLine(Vector2 start, Vector2 end)
     {
         var prefab = Instantiate(linePrefab, transform.position, transform.rotation) as GameObject;
+        // 親を設定
+        prefab.transform.SetParent(canvas.transform, false);
         prefab.GetComponent<line>().SetLine(start, end);
     }
 
@@ -242,6 +247,8 @@ public class PointManeger : MonoBehaviour
         };
 
         var prefab = Instantiate(trianglePrefab, transform.position, transform.rotation) as GameObject;
+        // 親を設定
+        prefab.transform.SetParent(canvas.transform, true);
         prefab.GetComponent<Triangle>().SetTriangle(position);
     }
 

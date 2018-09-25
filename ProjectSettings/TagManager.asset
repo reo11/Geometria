@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - triangle
+  - line
+  - point
   - 
   - 
   - 
@@ -38,12 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: point
+    uniqueID: 3191595191
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer
+  - name: triangle
     uniqueID: 3355038489
     locked: 0
-  - name: New Layer
+  - name: line
     uniqueID: 3289007987
     locked: 0
