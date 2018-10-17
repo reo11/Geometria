@@ -36,7 +36,11 @@ public class line : MonoBehaviour {
         // 幅とかの設定はいったんインスペクターでやることにする
         LineRenderer lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
-        lineRenderer.SetPosition(0, start);
-        lineRenderer.SetPosition(1, end);
+
+        // ボタンの後ろに表示するためにzを120に設定する
+        Vector3 s = new Vector3(start.x, start.y, 120);
+        Vector3 e = new Vector3(end.x, end.y, 120);
+        lineRenderer.SetPosition(0, s);
+        lineRenderer.SetPosition(1, e);
     }
 }

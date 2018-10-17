@@ -22,7 +22,9 @@ public class Triangle : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        var pos = this.transform.position;
+        pos.z = 120;
+        this.transform.position = pos;
     }
 	
 	// Update is called once per frame
