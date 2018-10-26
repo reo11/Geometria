@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c3c44c8490ae3478697bdd132fb0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: bd5f71359a0b0134aa8868430d3e36c6, type: 2}
 --- !u!120 &120850972967132088
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -66,7 +67,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: bd5f71359a0b0134aa8868430d3e36c6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,6 +138,6 @@ LineRenderer:
     numCapVertices: 5
     alignment: 0
     textureMode: 0
-    generateLightingData: 0
+    generateLightingData: 1
   m_UseWorldSpace: 1
   m_Loop: 0

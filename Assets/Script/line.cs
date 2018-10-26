@@ -7,6 +7,7 @@ using UnityEngine;
 public class line : MonoBehaviour {
 
     //private LineRenderer lineRenderer;
+    public Material mat;
 
     void Start()
     {
@@ -33,6 +34,9 @@ public class line : MonoBehaviour {
 
     public void SetLine(Vector2 start, Vector2 end)
     {
+        // 色を設定する
+        mat.color = Color.red;
+
         // 幅とかの設定はいったんインスペクターでやることにする
         LineRenderer lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
