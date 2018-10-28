@@ -20,13 +20,13 @@ public class line : MonoBehaviour {
         /*
         if (Input.GetMouseButtonDown(0))
         {
-            // クリック位置した座標の取得。 
+            // クリック位置した座標の取得。
             Vector2 goPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            // 頂点を追加。 
+            // 頂点を追加。
             ++this.lineRenderer.numPositions;
 
-            // 追加した頂点の座標を設定。 
+            // 追加した頂点の座標を設定。
             this.lineRenderer.SetPosition(this.lineRenderer.numPositions - 1, goPosition);
         }
         */
@@ -35,7 +35,7 @@ public class line : MonoBehaviour {
     public void SetLine(Vector2 start, Vector2 end)
     {
         // 色を設定する
-        mat.color = Color.red;
+        mat.color = Color.gray;
 
         // 幅とかの設定はいったんインスペクターでやることにする
         LineRenderer lineRenderer = GetComponent<LineRenderer>();

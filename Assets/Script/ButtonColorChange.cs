@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ButtonColorChange : MonoBehaviour {
 
     [SerializeField]
-    Color btnColor = Color.red;
+    Color btnColor = Color.white;
     // id
     private static int countID = 0;
     public int Id { get; private set; }

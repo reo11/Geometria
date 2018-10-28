@@ -10,15 +10,28 @@ public class Triangle : MonoBehaviour {
 
     [SerializeField]
     private Material _mat;
-
-    static int circulation = 0;
-
-    Color[] colors = new Color[]
-    {
-        new Color(248/255f, 243/255f, 214/255f, 1.0f),
-        new Color(227/255f, 63/255f, 35/255f, 1.0f),
-        new Color(3/255f, 179/255f, 202/255f, 1.0f),
+    static string[] colors = new string[]{
+        "#2f56e9",
+        "#2d64f5",
+        "#2f8dff",
+        "#33abf9",
+        "#34ccff",
+        "#52dbff",
+        "#17ecec",
+        "#6effff",
+        "#a8ffff",
     };
+    static System.Random r = new System.Random(1000);
+    static int circulation = r.Next(colors.Length);
+
+    // Color[] colors = new Color[]
+    // {
+    //     new Color(248/255f, 243/255f, 214/255f, 1.0f),
+    //     new Color(227/255f, 63/255f, 35/255f, 1.0f),
+    //     new Color(3/255f, 179/255f, 202/255f, 1.0f),
+    // };
+   
+    Color color = default(Color);
 
     // Use this for initialization
     void Start () {
@@ -57,7 +70,9 @@ public class Triangle : MonoBehaviour {
         renderer.material = _mat;
 
         // いったん三角形の色は、3色を循環させとく
-        renderer.material.color = colors[circulation++];
+        ColorUtility.TryParseHtmlString(colors[circulation++], out color);
+        
+        renderer.material.color = color;
         circulation = circulation % colors.Length;
         Debug.Log(circulation);
     }
