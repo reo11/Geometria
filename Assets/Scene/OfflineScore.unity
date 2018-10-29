@@ -947,8 +947,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -392, y: -610}
-  m_SizeDelta: {x: 300, y: 91.3}
+  m_AnchoredPosition: {x: -336, y: -608}
+  m_SizeDelta: {x: 192.4, y: 138.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1001020550
 MonoBehaviour:
@@ -971,18 +971,20 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 33ff772fc2f61b74d9dbc4fa579e33b5, type: 3}
-    m_FontSize: 10
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 132
-    m_Alignment: 2
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MyScore
+  m_Text: 'My
+
+    Score'
 --- !u!222 &1001020551
 CanvasRenderer:
   m_ObjectHideFlags: 0
