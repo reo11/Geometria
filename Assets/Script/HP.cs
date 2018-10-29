@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HP : MonoBehaviour {
 
-    private int hitPoint = 10000;
+    private int hitPoint = 13000;
 
 	// Use this for initialization
 	void Start () {
