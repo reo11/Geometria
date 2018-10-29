@@ -49,6 +49,11 @@ public class PointManeger : MonoBehaviour
     // 検出した三角形リスト
     List<int[]> detectedTriangles = new List<int[]>();
 
+    // 生成したpoint objectのリスト
+    GameObject[] PointObjects = new GameObject[pointNum];
+
+    // 削除された点の保存リスト(Falseに初期化されるっぽい)
+    bool[] DeletedPoint = new bool[pointNum];
 
     // Use this for initialization
     void Start()
@@ -81,6 +86,8 @@ public class PointManeger : MonoBehaviour
         // ↑このタイミングではまだbuttoncolorchangeのstart関数が走ってないのでidに適切な数が代入されてない(すべて0)
         // onClickに追加する
         prefab.GetComponent<Button>().onClick.AddListener(() => { OnClickPoint(id); });
+        // 後でdestroyしやすいようにここで取っておいてみる
+        PointObjects[id] = prefab;
     }
 
     void OnClickPoint(int Id)
@@ -120,7 +127,7 @@ public class PointManeger : MonoBehaviour
                 bool finish = false;
                 for (int i = 0; i < pointNum; i++)
                 {
-                    if (i != firstPoint && i != secondPoint) {
+                    if (i != firstPoint && i != secondPoint && DeletedPoint[i] != true) {
                          finish = finish || HPText.GetComponent<HP>().CheckHP(CalcHP(firstPoint, i));
                     }
                 }
@@ -215,6 +222,25 @@ public class PointManeger : MonoBehaviour
                 {
                     detectedTriangles.Add(triangle);
                     diffTriangles.Add(triangle);
+                }
+                // 三角形の内部の点を消す?
+                for (int num = 0; num < pointNum; num++)
+                {
+                    if (num != triangle[0] && num != triangle[1] && num != triangle[2])
+                    {
+                        Vector3[] pos = new Vector3[3]
+                        {
+                        WorldPosList[triangle[0]],
+                        WorldPosList[triangle[1]],
+                        WorldPosList[triangle[2]],
+                        };
+                        var insidepoint = CheckClockwise(pos, WorldPosList[num]);
+                        if (insidepoint == 0)
+                        {
+                            DeletedPoint[num] = true;
+                            Destroy(PointObjects[num]);
+                        }
+                    }
                 }
             }
         }
